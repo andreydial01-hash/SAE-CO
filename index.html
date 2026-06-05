@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- ============================================================
+       META & SEO
+       ============================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAE&amp;CO | Constructora & Ingeniería de Infraestructura</title>
+  <meta name="description" content="SAE&amp;CO — Constructora e ingeniería de infraestructura. Tecnología aplicada a la construcción, calidad certificada y soluciones que sostienen el futuro.">
+  <meta name="theme-color" content="#0057D9">
+  <meta name="author" content="SAE&amp;CO Construcción">
+
+  <!-- Open Graph (redes sociales) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SAE&amp;CO | Constructora & Ingeniería">
+  <meta property="og:description" content="Tecnología aplicada a la construcción. Solidez, calidad e innovación.">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- ============================================================
+       TIPOGRAFÍA — Carga optimizada de fuentes
+       Bebas Neue: marca / logotipo con máxima presencia
+       Big Shoulders Display: titulares arquitectónicos / industriales
+       Manrope: cuerpo de texto geométrico y refinado
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Big+Shoulders+Display:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+  /* ================================================================
+     1. VARIABLES GLOBALES (Design Tokens)
+     ================================================================ */
+  :root{
+    /* Marca */
+    --azul:        #0057D9;
+    --azul-claro:  #2E7DF0;
+    --azul-oscuro: #003E9C;
+    --negro:       #0A0A0A;
+    --blanco:      #FFFFFF;
+
+    /* Grises neutros */
+    --gris-900: #14161A;
+    --gris-800: #1E2127;
+    --gris-600: #4A5160;
+    --gris-400: #8A93A6;
+    --gris-200: #E3E7EE;
+    --gris-100: #F2F5FA;
+    --gris-50:  #F8FAFD;
+
+    /* Tipografía */
+    --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --font-body:    'Manrope', system-ui, sans-serif;
+
+    /* Sombras modernas */
+    --sombra-sm: 0 2px 8px rgba(10,10,10,.06);
+    --sombra-md: 0 12px 32px rgba(10,10,10,.10);
+    --sombra-lg: 0 28px 64px rgba(10,10,10,.18);
+    --sombra-azul: 0 18px 40px rgba(0,87,217,.35);
+
+    /* Layout */
+    --radio: 18px;
+    --max:   1240px;
+    --transicion: .4s cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* ================================================================
+     2. RESET & BASE
+     ================================================================ */
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+
+  body{
+    font-family:var(--font-body);
+    color:var(--negro);
+    background:var(--blanco);
+    line-height:1.65;
+    font-size:1.05rem;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{ font-family:var(--font-display); line-height:1.02; letter-spacing:-.5px; }
+  a{ text-decoration:none; color:inherit; }
+  img{ display:block; max-width:100%; height:auto; }
+  ul{ list-style:none; }
+
+  /* Foco visible accesible */
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--azul-claro);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* Salto rápido al contenido (accesibilidad) */
+  .skip-link{
+    position:absolute; left:-999px; top:0; z-index:9999;
+    background:var(--azul); color:#fff; padding:12px 20px; border-radius:0 0 10px 0;
+  }
+  .skip-link:focus{ left:0; }
+
+  /* Utilidad de contenedor centrado */
+  .contenedor{ width:100%; max-width:var(--max); margin-inline:auto; padding-inline:clamp(20px,5vw,48px); }
+
+  /* Etiqueta superior de sección */
+  .kicker{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--font-body); font-weight:700; font-size:.78rem;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--azul);
+    margin-bottom:18px;
+  }
+  .kicker::before{ content:""; width:34px; height:2px; background:var(--azul); display:inline-block; }
+
+  /* ================================================================
+     3. ANIMACIONES (solo CSS)
+     ================================================================ */
+  @keyframes subir{
+    from{ opacity:0; transform:translateY(34px); }
+    to{   opacity:1; transform:translateY(0); }
+  }
+  @keyframes pulso{
+    0%{   box-shadow:0 0 0 0 rgba(37,211,102,.55); }
+    70%{  box-shadow:0 0 0 18px rgba(37,211,102,0); }
+    100%{ box-shadow:0 0 0 0 rgba(37,211,102,0); }
+  }
+  @keyframes flotar{
+    0%,100%{ transform:translateY(0); }
+    50%{     transform:translateY(-10px); }
+  }
+  @keyframes brillar{
+    from{ background-position:0% 50%; }
+    to{   background-position:100% 50%; }
+  }
+
+  /* Entradas escalonadas del hero */
+  .anim{ opacity:0; animation:subir .9s cubic-bezier(.2,.7,.2,1) forwards; }
+  .d1{ animation-delay:.15s } .d2{ animation-delay:.35s }
+  .d3{ animation-delay:.55s } .d4{ animation-delay:.75s }
+
+  /* Respeto a usuarios que prefieren menos movimiento */
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+    .anim{ opacity:1; }
+  }
+
+  /* ================================================================
+     4. BOTONES
+     ================================================================ */
+  .btn{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:var(--font-body); font-weight:700; font-size:1rem;
+    padding:16px 32px; border-radius:60px; cursor:pointer; border:none;
+    transition:var(--transicion);
+  }
+  .btn svg{ width:18px; height:18px; transition:transform var(--transicion); }
+  .btn:hover svg{ transform:translateX(4px); }
+
+  .btn-primario{
+    background:linear-gradient(120deg,var(--azul),var(--azul-claro));
+    color:#fff; box-shadow:var(--sombra-azul);
+  }
+  .btn-primario:hover{ transform:translateY(-3px); box-shadow:0 24px 50px rgba(0,87,217,.45); }
+
+  .btn-fantasma{
+    background:rgba(255,255,255,.08); color:#fff;
+    border:1.5px solid rgba(255,255,255,.35); backdrop-filter:blur(6px);
+  }
+  .btn-fantasma:hover{ background:rgba(255,255,255,.18); transform:translateY(-3px); }
+
+  /* ================================================================
+     5. HEADER STICKY + GLASSMORPHISM
+     ================================================================ */
+  .header{
+    position:sticky; top:0; z-index:1000;
+    background:rgba(10,10,10,.55);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .header .contenedor{
+    display:flex; align-items:center; justify-content:space-between;
+    height:78px;
+  }
+  /* Logo */
+  .logo{ display:flex; align-items:center; gap:0; color:#fff; }
+  .logo b{
+    font-family:'Bebas Neue', var(--font-display); font-weight:400;
+    font-size:2.2rem; letter-spacing:.08em;
+  }
+  .logo b span{ color:var(--azul-claro); }
+
+  /* Navegación */
+  .nav ul{ display:flex; gap:34px; }
+  .nav a{
+    color:rgba(255,255,255,.82); font-weight:600; font-size:.95rem;
+    position:relative; padding:6px 0; transition:color var(--transicion);
+  }
+  .nav a::after{
+    content:""; position:absolute; left:0; bottom:0; height:2px; width:0;
+    background:var(--azul-claro); transition:width var(--transicion);
+  }
+  .nav a:hover{ color:#fff; }
+  .nav a:hover::after{ width:100%; }
+
+  .header .btn{ padding:11px 24px; font-size:.92rem; }
+
+  /* Menú accesible para móvil (sin JS, usando checkbox) */
+  .menu-toggle, .menu-icono{ display:none; }
+
+  /* ================================================================
+     6. HERO — Pantalla completa
+     ================================================================ */
+  .hero{
+    position:relative; min-height:100vh; display:flex; align-items:center;
+    color:#fff; overflow:hidden;
+    /* Imagen de fondo (construcción moderna) + degradado de respaldo */
+    background:
+      linear-gradient(180deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.55) 45%, rgba(0,62,156,.65) 100%),
+      linear-gradient(120deg,#0A0A0A,#10243f),
+      url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80');
+    background-size:cover; background-position:center;
+  }
+  .hero .contenedor{ position:relative; z-index:2; padding-block:120px; }
+
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:10px;
+    background:rgba(0,87,217,.18); border:1px solid rgba(46,125,240,.5);
+    color:#cfe0ff; padding:8px 18px; border-radius:60px;
+    font-size:.82rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    backdrop-filter:blur(6px); margin-bottom:28px;
+  }
+  .hero-badge i{ width:8px; height:8px; border-radius:50%; background:#2EE08C; display:inline-block; }
+
+  .hero h1{
+    font-weight:800; font-size:clamp(3rem, 8vw, 6.5rem);
+    max-width:16ch; text-transform:uppercase;
+  }
+  .hero h1 .resalte{
+    background:linear-gradient(100deg,var(--azul-claro),#7FB2FF, var(--azul-claro));
+    background-size:200% auto; -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; animation:brillar 5s linear infinite;
+  }
+  .hero p.sub{
+    font-family:var(--font-body); font-size:clamp(1.05rem,1.6vw,1.35rem);
+    color:rgba(255,255,255,.82); max-width:54ch; margin:26px 0 40px;
+    font-weight:400;
+  }
+  .hero-acciones{ display:flex; gap:16px; flex-wrap:wrap; }
+
+  /* Indicador de scroll */
+  .scroll-cue{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2;
+    color:rgba(255,255,255,.6); font-size:.72rem; letter-spacing:.25em; text-transform:uppercase;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    animation:flotar 2.6s ease-in-out infinite;
+  }
+  .scroll-cue span{ width:1px; height:38px; background:linear-gradient(rgba(255,255,255,.7),transparent); }
+
+  /* ================================================================
+     7. SEPARADORES SVG entre secciones
+     ================================================================ */
+  .sep{ display:block; width:100%; height:auto; line-height:0; }
+
+  /* ================================================================
+     9. MISIÓN / VISIÓN / VALORES — Sección oscura diferenciada
+     ================================================================ */
+  .proposito{
+    position:relative; background:var(--negro); color:#fff;
+    padding:clamp(90px,11vw,150px) 0; overflow:hidden;
+  }
+  .proposito::before{ /* resplandor radial sutil */
+    content:""; position:absolute; top:-20%; right:-10%; width:60vw; height:60vw;
+    background:radial-gradient(circle, rgba(0,87,217,.35), transparent 60%);
+    pointer-events:none;
+  }
+  .proposito .cab{ text-align:center; max-width:680px; margin:0 auto 70px; position:relative; }
+  .proposito h2{ font-size:clamp(2.4rem,5vw,3.6rem); font-weight:800; text-transform:uppercase; }
+  .proposito .cab p{ color:var(--gris-400); margin-top:18px; }
+
+  .tarjetas{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; position:relative; }
+  .tarjeta{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:var(--radio); padding:40px 34px;
+    backdrop-filter:blur(8px);
+    transition:var(--transicion);
+  }
+  .tarjeta:hover{
+    transform:translateY(-8px); border-color:rgba(46,125,240,.6);
+    background:rgba(0,87,217,.10); box-shadow:var(--sombra-lg);
+  }
+  .tarjeta .ico{
+    width:60px; height:60px; border-radius:14px; display:grid; place-items:center;
+    background:linear-gradient(135deg,var(--azul),var(--azul-claro));
+    box-shadow:var(--sombra-azul); margin-bottom:24px;
+  }
+  .tarjeta .ico svg{ width:30px; height:30px; color:#fff; }
+  .tarjeta h3{ font-size:1.7rem; font-weight:700; margin-bottom:12px; text-transform:uppercase; }
+  .tarjeta p{ color:var(--gris-400); font-size:1rem; }
+
+  /* ================================================================
+     10. CONFIANZA — Pilares con iconos SVG personalizados
+     ================================================================ */
+  .confianza{ padding:clamp(80px,10vw,140px) 0; background:var(--gris-50); }
+  .confianza .cab{ max-width:640px; margin-bottom:64px; }
+  .confianza h2{ font-size:clamp(2.4rem,5vw,3.6rem); font-weight:800; color:var(--negro); text-transform:uppercase; }
+  .confianza .cab p{ color:var(--gris-600); margin-top:18px; }
+
+  .pilares{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  .pilar{
+    background:#fff; border:1px solid var(--gris-200); border-radius:var(--radio);
+    padding:38px 30px; transition:var(--transicion); position:relative; overflow:hidden;
+  }
+  .pilar::after{ /* línea de acento inferior animada */
+    content:""; position:absolute; left:0; bottom:0; height:4px; width:0;
+    background:linear-gradient(90deg,var(--azul),var(--azul-claro));
+    transition:width .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .pilar:hover{ transform:translateY(-8px); box-shadow:var(--sombra-md); border-color:transparent; }
+  .pilar:hover::after{ width:100%; }
+  .pilar .ico{
+    width:64px; height:64px; border-radius:16px; display:grid; place-items:center;
+    background:var(--gris-100); color:var(--azul); margin-bottom:24px;
+    transition:var(--transicion);
+  }
+  .pilar:hover .ico{ background:var(--azul); color:#fff; transform:rotate(-6deg); }
+  .pilar .ico svg{ width:32px; height:32px; }
+  .pilar h3{ font-size:1.5rem; font-weight:700; color:var(--negro); margin-bottom:10px; text-transform:uppercase; }
+  .pilar p{ color:var(--gris-600); font-size:.96rem; }
+
+  /* ================================================================
+     11. LLAMADO A LA ACCIÓN (CTA)
+     ================================================================ */
+  .cta{ padding:clamp(40px,6vw,90px) 0; background:var(--blanco); }
+  .cta-caja{
+    position:relative; overflow:hidden; border-radius:32px;
+    background:
+      linear-gradient(120deg, rgba(10,10,10,.86), rgba(0,62,156,.78)),
+      url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1920&q=80');
+    background-size:cover; background-position:center;
+    padding:clamp(56px,8vw,100px) clamp(28px,6vw,80px);
+    color:#fff; text-align:center;
+    box-shadow:var(--sombra-lg);
+  }
+  .cta-caja::before{ /* patrón geométrico decorativo */
+    content:""; position:absolute; inset:0; opacity:.15; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px);
+    background-size:28px 28px;
+  }
+  .cta-caja h2{ position:relative; font-size:clamp(2.2rem,5.5vw,4rem); font-weight:800; text-transform:uppercase; max-width:18ch; margin:0 auto 20px; }
+  .cta-caja p{ position:relative; color:rgba(255,255,255,.85); max-width:52ch; margin:0 auto 38px; font-size:1.1rem; }
+  .cta-caja .btn{ position:relative; }
+
+  /* ================================================================
+     12. FOOTER
+     ================================================================ */
+  .footer{ background:var(--negro); color:var(--gris-400); padding:80px 0 0; }
+  .footer .grid{
+    display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:48px; padding-bottom:60px;
+    border-bottom:1px solid rgba(255,255,255,.10);
+  }
+  .footer .logo b{ color:#fff; font-size:2.6rem; }
+  .footer .marca p{ margin-top:20px; max-width:38ch; font-size:.98rem; }
+  .footer h4{
+    font-family:var(--font-body); color:#fff; font-weight:700; font-size:.85rem;
+    letter-spacing:.14em; text-transform:uppercase; margin-bottom:22px;
+  }
+  .footer li{ margin-bottom:14px; }
+  .footer a:hover{ color:var(--azul-claro); }
+  .footer .contacto li{ display:flex; gap:12px; align-items:flex-start; }
+  .footer .contacto svg{ width:18px; height:18px; color:var(--azul-claro); flex:none; margin-top:3px; }
+  .footer .bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    padding:26px 0; font-size:.85rem;
+  }
+  .footer .bottom .redes{ display:flex; gap:14px; }
+  .footer .bottom .redes a{
+    width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.18);
+    display:grid; place-items:center; transition:var(--transicion);
+  }
+  .footer .bottom .redes a:hover{ background:var(--azul); border-color:var(--azul); color:#fff; }
+  .footer .bottom .redes svg{ width:18px; height:18px; }
+
+  /* ================================================================
+     13. BOTÓN FLOTANTE DE WHATSAPP
+     ================================================================ */
+  .whatsapp{
+    position:fixed; right:24px; bottom:24px; z-index:1500;
+    width:60px; height:60px; border-radius:50%;
+    background:#25D366; color:#fff;
+    display:grid; place-items:center;
+    box-shadow:0 10px 26px rgba(37,211,102,.45);
+    animation:pulso 2.4s infinite;
+    transition:transform var(--transicion);
+  }
+  .whatsapp:hover{ transform:scale(1.08); }
+  .whatsapp svg{ width:32px; height:32px; }
+  .whatsapp .tip{
+    position:absolute; right:74px; top:50%; transform:translateY(-50%);
+    background:var(--negro); color:#fff; white-space:nowrap;
+    padding:8px 14px; border-radius:10px; font-size:.85rem; font-weight:600;
+    opacity:0; pointer-events:none; transition:var(--transicion);
+    box-shadow:var(--sombra-md);
+  }
+  .whatsapp:hover .tip{ opacity:1; right:80px; }
+
+  /* ================================================================
+     14. RESPONSIVE — Tablet y Móvil
+     ================================================================ */
+  @media (max-width:980px){
+    .tarjetas{ grid-template-columns:1fr 1fr; }
+    .pilares{ grid-template-columns:1fr 1fr; }
+    .footer .grid{ grid-template-columns:1fr 1fr; }
+  }
+
+  @media (max-width:760px){
+    /* Menú hamburguesa accesible sin JS */
+    .menu-icono{
+      display:grid; place-items:center; width:46px; height:46px; cursor:pointer;
+      border-radius:10px; border:1px solid rgba(255,255,255,.2);
+    }
+    .menu-icono svg{ width:24px; height:24px; color:#fff; }
+    .header .btn-desktop{ display:none; }
+    .nav{
+      position:absolute; top:78px; left:0; right:0;
+      background:rgba(10,10,10,.96); backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      max-height:0; overflow:hidden; transition:max-height .45s ease;
+    }
+    .menu-toggle:checked ~ .nav{ max-height:340px; }
+    .nav ul{ flex-direction:column; gap:0; padding:10px 24px 24px; }
+    .nav li{ border-bottom:1px solid rgba(255,255,255,.07); }
+    .nav a{ display:block; padding:16px 0; }
+
+    .tarjetas, .pilares, .footer .grid{ grid-template-columns:1fr; }
+    .footer .bottom{ flex-direction:column; text-align:center; }
+    .whatsapp{ width:56px; height:56px; right:18px; bottom:18px; }
+  }
+
+  @media (max-width:420px){
+    .hero-acciones{ flex-direction:column; }
+    .hero-acciones .btn{ width:100%; justify-content:center; }
+  }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#inicio">Saltar al contenido</a>
+
+  <!-- ================================================================
+       HEADER STICKY
+       El checkbox oculto controla el menú móvil sin necesidad de JS.
+       ================================================================ -->
+  <header class="header">
+    <div class="contenedor">
+      <a class="logo" href="#inicio" aria-label="SAE&amp;CO — Inicio">
+        <b>SAE<span>&amp;CO</span></b>
+      </a>
+
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" hidden>
+
+      <!-- Navegación -->
+      <nav class="nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#proposito">Propósito</a></li>
+          <li><a href="#confianza">Confianza</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn-primario btn-desktop" href="#contacto">
+        Cotizar Proyecto
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <!-- Botón de menú móvil -->
+      <label for="menu-toggle" class="menu-icono" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </label>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <!-- ================================================================
+         HERO
+         ================================================================ -->
+    <section class="hero" aria-label="Presentación">
+      <div class="contenedor">
+        <span class="hero-badge anim d1"><i></i> Ingeniería · Infraestructura · Tecnología</span>
+
+        <h1 class="anim d2">Construimos<br>el <span class="resalte">futuro</span><br>que sostiene</h1>
+
+        <p class="sub anim d3">
+          En SAE&amp;CO diseñamos y edificamos obras de infraestructura con precisión técnica,
+          estándares internacionales de seguridad y la solidez de quienes entienden que cada
+          estructura es un compromiso a largo plazo.
+        </p>
+
+        <div class="hero-acciones anim d3">
+          <a class="btn btn-primario" href="#contacto">
+            Inicia tu proyecto
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-fantasma" href="#proposito">Conócenos</a>
+        </div>
+
+
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true">Desliza <span></span></div>
+    </section>
+
+    <!-- ================================================================
+         PROPÓSITO — Misión / Visión / Valores (sección oscura)
+         ================================================================ -->
+    <section class="proposito" id="proposito">
+      <div class="contenedor">
+        <div class="cab">
+          <span class="kicker" style="color:var(--azul-claro)">Nuestro Propósito</span>
+          <h2>Lo que nos mueve a construir</h2>
+          <p>Una visión clara y valores firmes son los cimientos sobre los que se levanta cada uno de nuestros proyectos.</p>
+        </div>
+
+        <div class="tarjetas">
+          <!-- Misión -->
+          <article class="tarjeta">
+            <div class="ico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Misión</h3>
+            <p>Ejecutar obras de infraestructura que eleven la calidad de vida de las comunidades, aplicando ingeniería responsable, tecnología y los más altos estándares de seguridad.</p>
+          </article>
+
+          <!-- Visión -->
+          <article class="tarjeta">
+            <div class="ico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Visión</h3>
+            <p>Ser la constructora de referencia regional, reconocida por la innovación, la solidez de sus estructuras y el compromiso inquebrantable con cada cliente y comunidad.</p>
+          </article>
+
+          <!-- Valores -->
+          <article class="tarjeta">
+            <div class="ico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Valores</h3>
+            <p>Integridad, seguridad, excelencia técnica y respeto por el entorno. Principios que guían cada decisión, desde el primer plano hasta la entrega de llaves.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         CONFIANZA — Pilares con iconos SVG
+         ================================================================ -->
+    <section class="confianza" id="confianza">
+      <div class="contenedor">
+        <div class="cab">
+          <span class="kicker">Por qué confiar en SAE&amp;CO</span>
+          <h2>Cimientos sobre los que se construye la confianza</h2>
+          <p>Cada proyecto es respaldado por cuatro pilares que garantizan resultados duraderos y seguros.</p>
+        </div>
+
+        <div class="pilares">
+          <!-- Calidad -->
+          <article class="pilar">
+            <div class="ico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.4L12 16.8 5.9 19.4 7.4 13l-5-4.4L9 8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Calidad</h3>
+            <p>Materiales certificados y control riguroso en cada fase para estructuras que perduran.</p>
+          </article>
+
+          <!-- Seguridad -->
+          <article class="pilar">
+            <div class="ico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Seguridad</h3>
+            <p>Protocolos certificados que protegen a personas, comunidades y al proyecto.</p>
+          </article>
+
+          <!-- Innovación -->
+          <article class="pilar">
+            <div class="ico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2h5c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Innovación</h3>
+            <p>Maquinaria de última generación y gestión basada en datos.</p>
+          </article>
+
+          <!-- Experiencia -->
+          <article class="pilar">
+            <div class="ico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 21V10l9-7 9 7v11" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 21v-6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Experiencia</h3>
+            <p>Cuatro años de trayectoria respaldan cada compromiso que asumimos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         LLAMADO A LA ACCIÓN
+         ================================================================ -->
+    <section class="cta" id="contacto" aria-label="Contacto">
+      <div class="contenedor">
+        <div class="cta-caja">
+          <h2>¿Listo para levantar tu próximo proyecto?</h2>
+          <p>Conversemos sobre tu obra. Nuestro equipo de ingeniería está listo para convertir tu visión en una estructura sólida, segura y a la vanguardia.</p>
+          <a class="btn btn-primario" href="#contacto">
+            Solicitar cotización
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="grid">
+        <!-- Marca -->
+        <div class="marca">
+          <a class="logo" href="#inicio" aria-label="SAE&amp;CO — Inicio">
+            <b>SAE<span>&amp;CO</span></b>
+          </a>
+          <p>Constructora e ingeniería de infraestructura. Tecnología aplicada a la construcción para edificar el futuro con solidez, seguridad e innovación.</p>
+        </div>
+
+        <!-- Enlaces -->
+        <div>
+          <h4>Navegación</h4>
+          <ul>
+              <li><a href="#proposito">Propósito</a></li>
+            <li><a href="#confianza">Confianza</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h4>Contacto</h4>
+          <ul class="contacto">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="2"/></svg>
+              Jazmín 1, Mz 3, Lt 6, Col.&nbsp;Paraíso del Sol.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <a href="mailto:contacto@saeco.com">contacto@saeco.com</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              <a href="tel:+522226673447">222 667 3447</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Barra inferior -->
+      <div class="bottom">
+        <span>© 2026 SAE&amp;CO Construcción S.A. de C.V. — Todos los derechos reservados.</span>
+        <div class="redes" aria-label="Redes sociales">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM0 8h5v16H0V8Zm7.5 0H12v2.2h.07c.63-1.2 2.17-2.46 4.46-2.46C21.4 7.74 24 10 24 14.6V24h-5v-8.2c0-1.96-.7-3.3-2.46-3.3-1.34 0-2.14.9-2.49 1.77-.13.31-.16.74-.16 1.18V24h-5V8Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 22v-8h2.7l.4-3H13V9c0-.9.3-1.5 1.6-1.5H17V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2V11H8v3h2.5v8H13Z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================
+       BOTÓN FLOTANTE DE WHATSAPP
+       ================================================================ -->
+  <a class="whatsapp" href="https://wa.me/522226673447" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+    <span class="tip">¡Escríbenos!</span>
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+      <path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3Zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.2 1.1 1.1-4-.2-.4a10 10 0 0 1-1.6-5.3C5.6 9.8 10.2 5.2 16 5.2S26.4 9.8 26.4 15.5 21.8 25.7 16 25.7Zm5.7-7.6c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.4 4.7 2 .9 2.8.9 3.8.8.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"/>
+    </svg>
+  </a>
+
+</body>
+</html>
